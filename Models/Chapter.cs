@@ -14,7 +14,7 @@ namespace HSEHackathonProject.Models
     public class Chapter
     {
         public string Name { get; set; }
-        public List<SolvableTask> ChapterTasks;
+        public List<SolvableTask>? ChapterTasks;
 
         public static async Task<Chapter> Of(string chapterPath)
         {
@@ -31,10 +31,10 @@ namespace HSEHackathonProject.Models
                 if (reader.Name == "Name")
                     tag.Name = reader.Value;
             }
-            reader.Close();
 
             Chapter chapter = new Chapter();
             chapter.ChapterTasks = await ChaptersTasks.GetChapterTasks(chapterPath);
+            //chapter.ChapterTasks = null;
             chapter.Name = tag.Name;
             return chapter;
         }

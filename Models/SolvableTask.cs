@@ -36,72 +36,72 @@ namespace HSEHackathonProject.Models
 
         public string RightAnswer { get; set; }
 
-        public async static Task<SolvableTask> Of(string resourceFolder)
+        public async static Task<SolvableTask?> Of(string resourceFolder)
         {
-            XMLTaskMetadataTag meta = new();
-            XMLAnswerTag answer = new();
-            XMLTaskTag task = new();
-            XMLCorrectAnswerTag correctAnswer = new();
+                XMLTaskMetadataTag meta = new();
+                XMLAnswerTag answer = new();
+                XMLTaskTag task = new();
+                XMLCorrectAnswerTag correctAnswer = new();
 
-            XmlReaderSettings settings = new();
-            settings.Async = true;
-            settings.IgnoreWhitespace = true;
-            settings.IgnoreComments = true;
+                XmlReaderSettings settings = new();
+                settings.Async = true;
+                settings.IgnoreWhitespace = true;
+                settings.IgnoreComments = true;
 
-            XmlReader xml = XmlReader.Create(resourceFolder + "\\meta.xml", settings);
-            await xml.MoveToContentAsync();
-            while (xml.MoveToNextAttribute())
-            {
-                if (xml.Name == "TaskNo")
+                XmlReader xml = XmlReader.Create(resourceFolder + "\\meta.xml", settings);
+                await xml.MoveToContentAsync();
+                while (xml.MoveToNextAttribute())
                 {
-                    meta.TaskNo = xml.Value;
+                    if (xml.Name == "TaskNo")
+                    {
+                        meta.TaskNo = xml.Value;
+                    }
                 }
-            }
 
-            await xml.MoveToContentAsync();
-            while (await xml.ReadAsync())
-            {
-                if (xml.NodeType != XmlNodeType.Element)
-                    continue;
-
-                switch (xml.Name)
+                await xml.MoveToContentAsync();
+                while (await xml.ReadAsync())
                 {
-                    case "Task":
-                        while (xml.MoveToNextAttribute())
-                        {
-                            if (xml.Name == "Source")
-                                task.Source = xml.Value;
-                        }
-                        xml.MoveToElement();
-                        break;
-                    case "Answer":
-                        while (xml.MoveToNextAttribute())
-                        {
-                            if (xml.Name == "Source")
-                                answer.Source = xml.Value;
-                        }
-                        xml.MoveToElement();
-                        break;
-                    case "CorrectAnswer":
-                        while (xml.MoveToNextAttribute())
-                        {
-                            if (xml.Name == "Type")
-                                correctAnswer.Type = xml.Value;
-                        }
-                        xml.Read();
-                        correctAnswer.Content = xml.Value.Trim();
-                        xml.MoveToElement();
-                        break;
+                    if (xml.NodeType != XmlNodeType.Element)
+                        continue;
+
+                    switch (xml.Name)
+                    {
+                        case "Task":
+                            while (xml.MoveToNextAttribute())
+                            {
+                                if (xml.Name == "Source")
+                                    task.Source = xml.Value;
+                            }
+                            xml.MoveToElement();
+                            break;
+                        case "Answer":
+                            while (xml.MoveToNextAttribute())
+                            {
+                                if (xml.Name == "Source")
+                                    answer.Source = xml.Value;
+                            }
+                            xml.MoveToElement();
+                            break;
+                        case "CorrectAnswer":
+                            while (xml.MoveToNextAttribute())
+                            {
+                                if (xml.Name == "Type")
+                                    correctAnswer.Type = xml.Value;
+                            }
+                            xml.Read();
+                            correctAnswer.Content = xml.Value.Trim();
+                            xml.MoveToElement();
+                            break;
+                    }
                 }
-            }
 
-            SolvableTask stask = new();
-            stask.TaskSource = resourceFolder + "\\" + task.Source;
-            stask.AnswerSource = resourceFolder + "\\" + answer.Source;
-            stask.RightAnswer = correctAnswer.Content;
-            stask.TaskNo = meta.TaskNo;
+                SolvableTask stask = new();
+                stask.TaskSource = resourceFolder + "\\" + task.Source;
+                stask.AnswerSource = resourceFolder + "\\" + answer.Source;
+                stask.RightAnswer = correctAnswer.Content;
+                stask.TaskNo = meta.TaskNo;
 
-            return stask;
+                return stask;
         }
 
         public override string ToString()

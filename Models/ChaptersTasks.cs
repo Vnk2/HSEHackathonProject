@@ -35,8 +35,9 @@ namespace HSEHackathonProject.Models
             StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(chapterPath);
             foreach (StorageFolder taskFolder in await folder.GetFoldersAsync())
             {
-                SolvableTask task = await SolvableTask.Of(taskFolder.Path);
-                taskList.Add(task);
+                SolvableTask? task = await SolvableTask.Of(taskFolder.Path);
+                if (task is not null)
+                    taskList.Add(task);
             }
 
             return taskList;

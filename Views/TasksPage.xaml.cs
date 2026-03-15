@@ -15,6 +15,8 @@ using System.Xml;
 using Windows.ApplicationModel.UserDataTasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization;
+using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,9 +28,16 @@ namespace HSEHackathonProject.Views
     /// </summary>
     public sealed partial class TasksPage : Page
     {
+        public static TasksPage Instance;
+
+        static bool init = false;
         public async void BuildTaskTree()
         {
-            string path = "C:\\Users\\metrochel\\source\\repos\\HSEHackathonProject\\Assets\\Chapters";
+            string path = ApplicationData.Current.LocalFolder.Path + "\\AvailableBooks\\irodov";
+            TreeViewNode nd = new();
+            nd.Content = path;
+            TasksView.RootNodes.Add(nd);
+            InProgressRing.Visibility = Visibility.Visible;
             List<Chapter> chapters = await ChaptersTasks.GetTextbookChapters(path);
             foreach (Chapter chapter in chapters)
             {
@@ -42,13 +51,30 @@ namespace HSEHackathonProject.Views
                 }
                 TasksView.RootNodes.Add(node);
             }
+            InProgressRing.Visibility = Visibility.Collapsed;
+        }
+
+        private async void CopyTaskTree()
+        {
+            foreach (TreeViewNode node in Instance.TasksView.RootNodes)
+            {
+                TasksView.RootNodes.Add(node);
+            }
         }
 
         public TasksPage()
         {
             InitializeComponent();
 
-            BuildTaskTree();
+            if (!init)
+            {
+                BuildTaskTree();
+                init = true;
+                Instance = this;
+            } else
+            {
+                CopyTaskTree();
+            }
         }
 
         private void TasksView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)

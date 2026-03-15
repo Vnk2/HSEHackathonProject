@@ -23,5 +23,9 @@
     <Grid>
         <TreeView Name="TasksView" ItemTemplate="{StaticResource TaskTemplate}"
                   SelectionMode="None" ItemInvoked="TasksView_ItemInvoked"/>
+
+        <ProgressRing Name="InProgressRing" IsIndeterminate="True"
+                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Visibility="Collapsed"/>
     </Grid>
 </Page>
