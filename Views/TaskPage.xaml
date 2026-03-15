@@ -19,6 +19,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Spacing="10" Grid.Row="0" Grid.ColumnSpan="2">
@@ -42,5 +43,19 @@
                 <TextBlock Text="Показать ответ"/>
             </StackPanel>
         </Button>
+
+        <TextBox Name="MessagesBox" 
+                 Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                 PlaceholderText="Напишите чат-боту..."
+                 IsReadOnly="True" AcceptsReturn="True"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+        <StackPanel Orientation="Horizontal" Spacing="5"
+                    Grid.Column="2" Grid.Row="2">
+            <TextBox Name="MessageTextBox" PlaceholderText="Сообщение..."
+                     Width="100"/>
+            <Button Name="SendBtn" Content="Отправить" Click="SendBtn_Click"/>
+        </StackPanel>
+
     </Grid>
 </Page>

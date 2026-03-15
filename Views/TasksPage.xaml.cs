@@ -34,9 +34,6 @@ namespace HSEHackathonProject.Views
         public async void BuildTaskTree()
         {
             string path = ApplicationData.Current.LocalFolder.Path + "\\AvailableBooks\\irodov";
-            TreeViewNode nd = new();
-            nd.Content = path;
-            TasksView.RootNodes.Add(nd);
             InProgressRing.Visibility = Visibility.Visible;
             List<Chapter> chapters = await ChaptersTasks.GetTextbookChapters(path);
             foreach (Chapter chapter in chapters)

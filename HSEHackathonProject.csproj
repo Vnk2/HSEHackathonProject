@@ -81,4 +81,7 @@
   <ItemGroup>
     <PRIResource Remove="Assets\Chapters\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Assets\neyro.py" />
+  </ItemGroup>
 </Project>

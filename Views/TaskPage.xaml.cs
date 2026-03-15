@@ -10,11 +10,13 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -52,6 +54,36 @@ namespace HSEHackathonProject.Views
         {
             ShowAnswerButton.IsEnabled = false;
             AnswerImage.Visibility = Visibility.Visible;
+        }
+
+        private async void SendBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SendBtn.IsEnabled = false;
+
+            Process pythonProcess = new();
+            pythonProcess.StartInfo.FileName = "python.exe";
+            pythonProcess.StartInfo.RedirectStandardInput = true;
+            pythonProcess.StartInfo.RedirectStandardOutput = true;
+            pythonProcess.StartInfo.RedirectStandardError = true;
+            pythonProcess.StartInfo.UseShellExecute = false;
+            pythonProcess.StartInfo.CreateNoWindow = true;
+            pythonProcess.StartInfo.Arguments = ApplicationData.Current.LocalFolder.Path + "\\neyro.py";
+            pythonProcess.Start();
+
+            string message = MessageTextBox.Text;
+
+            MessagesBox.Text += "Вы: \"" + message + "\"\r\n\r\n";
+            pythonProcess.StandardInput.WriteLine(MessageTextBox.Text);
+            pythonProcess.StandardInput.Flush();
+            pythonProcess.StandardInput.Close();
+
+            pythonProcess.WaitForExit();
+            string response = pythonProcess.StandardOutput.ReadLine();
+
+            MessagesBox.Text += response + "\r\n";
+            //MessagesBox.Text += await pythonProcess.StandardError.ReadToEndAsync();
+
+            SendBtn.IsEnabled = true;
         }
     }
 }
