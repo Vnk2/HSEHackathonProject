@@ -26,6 +26,8 @@ namespace HSEHackathonProject
         public MainWindow()
         {
             InitializeComponent();
+
+            ExtendsContentIntoTitleBar = true;
         }
     }
 }
