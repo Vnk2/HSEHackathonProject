@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "HSEHackathonProject (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "HSEHackathonProject (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
