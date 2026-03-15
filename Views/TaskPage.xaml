@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="HSEHackathonProject.Views.TaskPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HSEHackathonProject.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Padding="25" RowSpacing="10" ColumnSpacing="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Spacing="10" Grid.Row="0" Grid.ColumnSpan="2">
+            <TextBlock Name="TaskNoTextBlock" Text="Задача № 123"
+                       FontSize="20" FontWeight="Bold"/>
+            <TextBlock Name="TaskTextBlock" Text="Два стержня одинаковой собственной длины l_0 движутся навстречу друг другу параллельно общей горизонтальной оси. В системе отсчёта, связанной с ..."
+                       FontSize="16" TextWrapping="WrapWholeWords"/>
+        </StackPanel>
+
+        <InfoBar Name="WrongInfoBar" Grid.Row="1" HorizontalAlignment="Center"
+                 Severity="Error"
+                 Title="Неправильно!"/>
+
+        <InfoBar Name="RightInfoBar" Grid.Row="1" HorizontalAlignment="Center"
+                 Severity="Success"
+                 Title="Правильно!"/>
+
+        <TextBox Name="AnswerTextBox" PlaceholderText="Ответ..."
+                 HorizontalAlignment="Stretch" MinWidth="300"
+                 Grid.Row="2" Grid.Column="0"/>
+        <Button Name="SubmitAnswerButton" Style="{StaticResource AccentButtonStyle}"
+                Grid.Row="2" Grid.Column="1" Click="SubmitAnswerButton_Click">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <SymbolIcon Symbol="Send" />
+                <TextBlock Text="Проверить"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>
