@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TaskMetadata TaskNo="360">
+	<Task Source="task.png" />
+	<Answer Source="answer.png" />
+	<CorrectAnswer Type="String">
+		goida
+	</CorrectAnswer>
+</TaskMetadata>

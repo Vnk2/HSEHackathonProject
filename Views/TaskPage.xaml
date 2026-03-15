@@ -23,8 +23,9 @@
         <StackPanel Spacing="10" Grid.Row="0" Grid.ColumnSpan="2">
             <TextBlock Name="TaskNoTextBlock" Text="Задача № 123"
                        FontSize="20" FontWeight="Bold"/>
-            <TextBlock Name="TaskTextBlock" Text="Два стержня одинаковой собственной длины l_0 движутся навстречу друг другу параллельно общей горизонтальной оси. В системе отсчёта, связанной с ..."
-                       FontSize="16" TextWrapping="WrapWholeWords"/>
+            <Image Source="/Assets/Square44x44Logo.png" 
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   MaxHeight="100"/>
         </StackPanel>
 
         <InfoBar Name="WrongInfoBar" Grid.Row="1" HorizontalAlignment="Center"

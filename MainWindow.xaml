@@ -24,7 +24,7 @@
                   Grid.Row="0"
               />
 
-        <Frame Name="TheFrame" Grid.Row="1" SourcePageType="views:TaskPage"/>
+        <Frame Name="TheFrame" Grid.Row="1" SourcePageType="views:TasksPage"/>
 
     </Grid>
 </Window>

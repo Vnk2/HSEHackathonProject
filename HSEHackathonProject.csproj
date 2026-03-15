@@ -14,7 +14,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\Chapters\1\chaptermeta.xml" />
+    <Content Remove="Assets\Chapters\1\t1\meta.xml" />
+    <Content Remove="Assets\Chapters\1\t2\meta.xml" />
+    <Content Remove="Assets\Chapters\2\chaptermeta.xml" />
+    <Content Remove="Assets\Chapters\2\t1\meta.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Views\TaskPage.xaml" />
+    <None Remove="Views\TasksPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,7 +52,9 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260209005" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Page Update="Views\TasksPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\TaskPage.xaml">
