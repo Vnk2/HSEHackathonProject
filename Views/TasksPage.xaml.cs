@@ -26,19 +26,37 @@ namespace HSEHackathonProject.Views
     /// </summary>
     public sealed partial class TasksPage : Page
     {
-        public async void DoStuff()
+        public async void BuildTaskTree()
         {
-            List<Chapter> chapters = await ChaptersTasks.GetTextbookChapters("C:\\Users\\metrochel\\source\\repos\\HSEHackathonProject\\Assets\\Chapters");
+            string path = "C:\\Users\\metrochel\\source\\repos\\HSEHackathonProject\\Assets\\Chapters";
+            List<Chapter> chapters = await ChaptersTasks.GetTextbookChapters(path);
             foreach (Chapter chapter in chapters)
             {
-                block.Text += chapter.ToString() + "\r\n";
+                TreeViewNode node = new();
+                node.Content = chapter;
+                foreach (SolvableTask task in chapter.ChapterTasks)
+                {
+                    TreeViewNode childNode = new();
+                    childNode.Content = task;
+                    node.Children.Add(childNode);
+                }
+                TasksView.RootNodes.Add(node);
             }
         }
+
         public TasksPage()
         {
             InitializeComponent();
 
-            DoStuff();
+            BuildTaskTree();
+        }
+
+        private void TasksView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+        {
+            if (((TreeViewNode)(args.InvokedItem)).Content is SolvableTask task)
+            {
+                Frame.Navigate(typeof(TaskPage), task);
+            }
         }
     }
 }

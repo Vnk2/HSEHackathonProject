@@ -9,7 +9,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Name="TaskTemplate" x:DataType="TreeViewNode">
+            <ItemContainer>
+                <StackPanel Orientation="Horizontal" Spacing="5">
+                    <SymbolIcon Symbol="Library"/>
+                    <TextBlock Text="{x:Bind Content.ToString()}"/>
+                </StackPanel>
+            </ItemContainer>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
-        <TextBlock Name="block" />
+        <TreeView Name="TasksView" ItemTemplate="{StaticResource TaskTemplate}"
+                  SelectionMode="None" ItemInvoked="TasksView_ItemInvoked"/>
     </Grid>
 </Page>

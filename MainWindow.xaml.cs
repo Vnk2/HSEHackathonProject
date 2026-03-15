@@ -29,5 +29,11 @@ namespace HSEHackathonProject
 
             ExtendsContentIntoTitleBar = true;
         }
+
+        private void WndTitleBar_BackRequested(TitleBar sender, object args)
+        {
+            if (TheFrame.CanGoBack)
+                TheFrame.GoBack();
+        }
     }
 }

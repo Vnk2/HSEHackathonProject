@@ -1,12 +1,15 @@
+using HSEHackathonProject.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,28 +31,27 @@ namespace HSEHackathonProject.Views
             InitializeComponent();
         }
 
-        private void RightAnswer()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            WrongInfoBar.IsOpen = false;
-            RightInfoBar.IsOpen = true;
-        }
+            base.OnNavigatedTo(e);
 
-        private void WrongAnswer()
-        {
-            RightInfoBar.IsOpen = false;
-            WrongInfoBar.IsOpen = true;
-        }
+            if (e.Parameter is SolvableTask task)
+            {
+                TaskNoTextBlock.Text = "Задача " + task.TaskNo;
+                Uri taskUri = new(task.TaskSource);
+                BitmapImage taskImg = new(taskUri);
+                Uri answerUri = new(task.AnswerSource);
+                BitmapImage answerImg = new(answerUri);
 
-        private void SubmitAnswerButton_Click(object sender, RoutedEventArgs e)
-        {
-            string answer = AnswerTextBox.Text;
-            if (answer == "123")
-            {
-                RightAnswer();
-            } else
-            {
-                WrongAnswer();
+                TaskImage.Source = taskImg;
+                AnswerImage.Source = answerImg;
             }
+        }
+
+        private void ShowAnswerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAnswerButton.IsEnabled = false;
+            AnswerImage.Visibility = Visibility.Visible;
         }
     }
 }

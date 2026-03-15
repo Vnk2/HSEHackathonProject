@@ -22,6 +22,9 @@
         
         <TitleBar Name="WndTitleBar" Title="Интерактивный задачник"
                   Grid.Row="0"
+                  IsBackButtonEnabled="{x:Bind TheFrame.CanGoBack, Mode=OneWay}"
+                  IsBackButtonVisible="True"
+                  BackRequested="WndTitleBar_BackRequested"
               />
 
         <Frame Name="TheFrame" Grid.Row="1" SourcePageType="views:TasksPage"/>

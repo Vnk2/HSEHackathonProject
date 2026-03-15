@@ -41,13 +41,7 @@ namespace HSEHackathonProject.Models
 
         public override string ToString()
         {
-            string ret = "Chapter\r\n";
-            ret += "Name = " + Name + "\r\n";
-            foreach (var task in ChapterTasks)
-            {
-                ret += task.ToString();
-            }
-            return ret;
+            return Name;
         }
     }
 }

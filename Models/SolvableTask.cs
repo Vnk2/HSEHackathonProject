@@ -106,12 +106,7 @@ namespace HSEHackathonProject.Models
 
         public override string ToString()
         {
-            string ret = "Task\r\n";
-            ret += "TaskNo = " + TaskNo + "\r\n";
-            ret += "TaskSource = " + TaskSource + "\r\n";
-            ret += "AnswerSource = " + AnswerSource + "\r\n";
-            ret += "CorrectAnswer = " + RightAnswer + "\r\n";
-            return ret;
+            return TaskNo;
         }
     }
 }

@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -23,27 +24,22 @@
         <StackPanel Spacing="10" Grid.Row="0" Grid.ColumnSpan="2">
             <TextBlock Name="TaskNoTextBlock" Text="Задача № 123"
                        FontSize="20" FontWeight="Bold"/>
-            <Image Source="/Assets/Square44x44Logo.png" 
-                   HorizontalAlignment="Left" VerticalAlignment="Top"
+            <Image Name="TaskImage" 
+                   HorizontalAlignment="Center" VerticalAlignment="Top"
                    MaxHeight="100"/>
         </StackPanel>
 
-        <InfoBar Name="WrongInfoBar" Grid.Row="1" HorizontalAlignment="Center"
-                 Severity="Error"
-                 Title="Неправильно!"/>
 
-        <InfoBar Name="RightInfoBar" Grid.Row="1" HorizontalAlignment="Center"
-                 Severity="Success"
-                 Title="Правильно!"/>
-
-        <TextBox Name="AnswerTextBox" PlaceholderText="Ответ..."
-                 HorizontalAlignment="Stretch" MinWidth="300"
-                 Grid.Row="2" Grid.Column="0"/>
-        <Button Name="SubmitAnswerButton" Style="{StaticResource AccentButtonStyle}"
-                Grid.Row="2" Grid.Column="1" Click="SubmitAnswerButton_Click">
-            <StackPanel Orientation="Horizontal" Spacing="5">
-                <SymbolIcon Symbol="Send" />
-                <TextBlock Text="Проверить"/>
+        <Image Name="AnswerImage" Grid.Row="2"
+               HorizontalAlignment="Center" VerticalAlignment="Bottom"
+               Visibility="Collapsed" MaxHeight="100" />
+        <Button Name="ShowAnswerButton" Grid.Row="3" 
+                Style="{StaticResource AccentButtonStyle}"
+                HorizontalAlignment="Stretch"
+                Click="ShowAnswerButton_Click">
+            <StackPanel Spacing="10" Orientation="Horizontal">
+                <SymbolIcon Symbol="Accept" />
+                <TextBlock Text="Показать ответ"/>
             </StackPanel>
         </Button>
     </Grid>

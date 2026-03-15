@@ -14,11 +14,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Assets\Chapters\1\chaptermeta.xml" />
-    <Content Remove="Assets\Chapters\1\t1\meta.xml" />
-    <Content Remove="Assets\Chapters\1\t2\meta.xml" />
-    <Content Remove="Assets\Chapters\2\chaptermeta.xml" />
-    <Content Remove="Assets\Chapters\2\t1\meta.xml" />
+    <Compile Remove="Assets\Chapters\**" />
+    <Content Remove="Assets\Chapters\**" />
+    <EmbeddedResource Remove="Assets\Chapters\**" />
+    <None Remove="Assets\Chapters\**" />
+    <Page Remove="Assets\Chapters\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\TaskPage.xaml" />
@@ -78,4 +78,7 @@
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
   </PropertyGroup>
+  <ItemGroup>
+    <PRIResource Remove="Assets\Chapters\**" />
+  </ItemGroup>
 </Project>
